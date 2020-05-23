@@ -1,0 +1,75 @@
+﻿<Window x:Class="StarWarsCharsMVVM.View.InitialWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StarWarsCharsMVVM.View"
+        xmlns:vm="clr-namespace:StarWarsCharsMVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="Star Wars Stats" Height="350" Width="450">
+    <Window.Resources>
+        <vm:InitialVM x:Key="vm" />
+    </Window.Resources>
+    
+    <Grid DataContext="{StaticResource vm}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="0" 
+                   Grid.ColumnSpan="3"
+                   Grid.RowSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#8c9ea3" Offset="1" />
+                    <GradientStop Color="#2a4158" Offset="0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Margin="0,20,0,0">
+            <Button Style="{StaticResource CircleButton}"
+                Command="{Binding OpenCharactersCommand}"
+                Content=""
+                    Width="60"
+                Height="60"
+                Background="#2e4a74"
+                Foreground="#435566"/>
+            <TextBlock Style="{StaticResource buttonLabelTextBlockStyle}"
+                       Text="Starships"
+                       HorizontalAlignment="Center"/>
+        </StackPanel >
+
+        <StackPanel Grid.Column="1" Margin="0,20,0,0">
+            <Button Style="{StaticResource CircleButton}"
+                Command="{Binding OpenCharactersCommand}"
+                    Content=""
+                Width="60"
+                Height="60"
+                Foreground="#2e4a74"
+                Background="#558bb0" />
+            <TextBlock Style="{StaticResource buttonLabelTextBlockStyle}"
+                       Text="Characters"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Margin="0,20,0,0">
+            <Button Style="{StaticResource CircleButton}"
+                Command="{Binding OpenCharactersCommand}"
+                    Content=""
+                Width="60"
+                Height="60"/>
+            <TextBlock Style="{StaticResource buttonLabelTextBlockStyle}"
+                       Text="Planets"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+        <Image Grid.ColumnSpan="3" 
+               Grid.Row="1"
+               Margin="0,0,0,10"
+               Source="/Images/Star-Wars-Logo-PNG-Photos.png" />
+
+    </Grid>
+</Window>

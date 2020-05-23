@@ -59,14 +59,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\CharacterVM.cs" />
+    <Compile Include="ViewModel\Commands\OpenCharactersCommand.cs" />
+    <Compile Include="ViewModel\Commands\OpenPlanetsCommand.cs" />
+    <Compile Include="ViewModel\Commands\OpenStarshipsCommand.cs" />
     <Compile Include="ViewModel\Commands\SearchCommand.cs" />
     <Compile Include="ViewModel\Helpers\SwapiHelper.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\InitialVM.cs" />
     <Compile Include="View\CharacterWindow.xaml.cs">
       <DependentUpon>CharacterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InitialWindow.xaml.cs">
+      <DependentUpon>InitialWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +110,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\InitialWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Star-Wars-Logo-PNG-Photos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\png-transparent-star-wars-logo-star-wars-text-logo-silhouette.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

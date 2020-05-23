@@ -38,9 +38,14 @@ namespace StarWarsCharsMVVM.ViewModel
             set 
             { 
                 selectedCharacter = value;
-                OnPropertyChanged("SelectedCharacter");
-
-                GetCharacterInfo();
+                
+                if (selectedCharacter != null)
+                {
+                    OnPropertyChanged("SelectedCharacter");
+                    GetCharacterInfo();
+                }
+                
+                
             }
         }
 
@@ -78,9 +83,10 @@ namespace StarWarsCharsMVVM.ViewModel
         private async void GetCharacterInfo()
         {
             Query = string.Empty;
-            Characters.Clear();
+            
 
             CharacterInfo = await SwapiHelper.GetCharacterInfo(SelectedCharacter.url);
+            Characters.Clear();
         }
         
         

@@ -31,7 +31,16 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
 
                 string json = await response.Content.ReadAsStringAsync();
 
-                characters = JsonConvert.DeserializeObject<List<Character>>(json);
+                int arrayStartIndex = json.IndexOf('[');
+
+                //cut off first part of json response
+                string jsonCut = json.Substring(arrayStartIndex);
+
+                //cut off final curly bracket as well from end of response
+                int finalCurlyBracketPosition = jsonCut.LastIndexOf('}');
+                string jsonFullyCut = jsonCut.Remove(finalCurlyBracketPosition);
+
+                characters = JsonConvert.DeserializeObject<List<Character>>(jsonFullyCut);
             }
 
             return characters;
@@ -50,7 +59,9 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
 
                 string json = await response.Content.ReadAsStringAsync();
 
-                characterInfo = (JsonConvert.DeserializeObject<List<CharacterInfo>>(json)).FirstOrDefault();
+                string jsonAsArray = "[" + json + "]";
+
+                characterInfo = (JsonConvert.DeserializeObject<List<CharacterInfo>>(jsonAsArray)).FirstOrDefault();
             }
 
             return characterInfo;

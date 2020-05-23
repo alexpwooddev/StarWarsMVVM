@@ -2,29 +2,151 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StarWarsCharsMVVM"
-             StartupUri="View/CharacterWindow.xaml">
+             StartupUri="View/InitialWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="generalBackgroundColour" Color="Black" />
-        <SolidColorBrush x:Key="goldTextColour" Color="#f6da22" />
+        <SolidColorBrush x:Key="generalTextBackgroundColour" Color="#AA8c9ea3" />
+        <SolidColorBrush x:Key="goldTextColour" Color="Gold" />
         <SolidColorBrush x:Key="whiteTextColour" Color="White" />
+        <SolidColorBrush x:Key="windowBackgroundColour" Color="#2a4158" />
+        <SolidColorBrush x:Key="darkTextBackgroundColour" Color="#AA558bb0" />
+
+        <Style TargetType="TextBlock" x:Key="headerTextBlockStyle" >
+          
+            <Setter Property="Foreground" Value="{StaticResource whiteTextColour}" />
+            <Setter Property="Background" Value="{StaticResource darkTextBackgroundColour}" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="buttonLabelTextBlockStyle" >
+
+            <Setter Property="Foreground" Value="{StaticResource whiteTextColour}" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+
+
+        <Style TargetType="TextBlock" x:Key="listViewTextBlockStyle" >
+
+            <Setter Property="Foreground" Value="{StaticResource goldTextColour}" />
+            <Setter Property="Background" Value="{StaticResource generalTextBackgroundColour}" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style TargetType="ListView" x:Key="listViewStyle" >
+            <Setter Property="Background" Value="{StaticResource generalTextBackgroundColour}" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
 
         <Style TargetType="TextBlock" x:Key="textBlockStyle1" >
-            <Setter Property="Background" Value="{StaticResource generalBackgroundColour}" />
-            <Setter Property="Foreground" Value="{StaticResource goldTextColour}" />
+
+            <Setter Property="Foreground" Value="{StaticResource whiteTextColour}" />
             <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="textBlockStyle2" >
-            <Setter Property="Background" Value="{StaticResource generalBackgroundColour}" />
+            <Setter Property="Background" Value="{StaticResource generalTextBackgroundColour}" />
             <Setter Property="Foreground" Value="{StaticResource whiteTextColour}" />
             <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="TextBox" x:Key="textBoxStyle" >
-            <Setter Property="Background" Value="{StaticResource generalBackgroundColour}"/>
+            <Setter Property="Background" Value="{StaticResource generalTextBackgroundColour}"/>
             <Setter Property="Foreground" Value="{StaticResource goldTextColour}" />
             <Setter Property="Margin" Value="4"/>
             <Setter Property="BorderBrush" Value="White" />
+        </Style>
+
+        <Style TargetType="StackPanel" x:Key="stackPanelStyle" >
+            
+        </Style>
+
+        <Style TargetType="Button" x:Key="buttonStyle" >
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MyFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Control}">
+                        <Grid Margin="8">
+                            <Ellipse
+                    Name="r1"
+                    Stroke="Black"
+                    StrokeDashArray="2 2"
+                    StrokeThickness="1"/>
+                            <Border
+                    Name="border"
+                    Width="{TemplateBinding ActualWidth}"
+                    Height="{TemplateBinding ActualHeight}"
+                    BorderThickness="1"
+                    CornerRadius="2"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CircleButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}"/>
+            <Setter Property="Background" Value="#FF6DB4EF"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Fill="{TemplateBinding Background}"/>
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush>
+                                        <GradientStop Offset="0" Color="#00000000"/>
+                                        <GradientStop Offset="0.88" Color="#00000000"/>
+                                        <GradientStop Offset="1" Color="#80000000"/>
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Margin="10" x:Name="highlightCircle" >
+                                <Ellipse.Fill >
+                                    <LinearGradientBrush >
+                                        <GradientStop Offset="0" Color="#50FFFFFF"/>
+                                        <GradientStop Offset="0.5" Color="#00FFFFFF"/>
+                                        <GradientStop Offset="1" Color="#50FFFFFF"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="highlightCircle" Property="Fill">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0.3,0" EndPoint="0.7,1">
+                                            <GradientStop Offset="0" Color="#50FFFFFF"/>
+                                            <GradientStop Offset="0.5" Color="#00FFFFFF"/>
+                                            <GradientStop Offset="1" Color="#50FFFFFF"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="content" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TranslateTransform Y="0.5" X="0.5"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
 

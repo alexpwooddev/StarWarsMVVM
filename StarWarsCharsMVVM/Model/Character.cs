@@ -18,11 +18,13 @@ namespace StarWarsCharsMVVM.Model
         public string gender { get; set; }
         public string homeworld { get; set; }
         public IList<string> films { get; set; }
-        public IList<object> species { get; set; }
-        public IList<string> vehicles { get; set; }
-        public IList<string> starships { get; set; }
+        public IList<string> species { get; set; }
+        public IList<object> vehicles { get; set; }
+        public IList<object> starships { get; set; }
         public DateTime created { get; set; }
         public DateTime edited { get; set; }
         public string url { get; set; }
     }
+
+    
 }
