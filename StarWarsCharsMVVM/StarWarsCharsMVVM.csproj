@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\Commands\OpenCharactersCommand.cs" />
     <Compile Include="ViewModel\Commands\OpenPlanetsCommand.cs" />
     <Compile Include="ViewModel\Commands\OpenStarshipsCommand.cs" />
+    <Compile Include="ViewModel\Commands\PlanetSearchCommand.cs" />
     <Compile Include="ViewModel\Commands\SearchCommand.cs" />
     <Compile Include="ViewModel\Commands\StarshipSearchCommand.cs" />
     <Compile Include="ViewModel\Helpers\SwapiHelper.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="View\InitialWindow.xaml.cs">
       <DependentUpon>InitialWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\PlanetVM.cs" />
     <Compile Include="View\PlanetWindow.xaml.cs">
       <DependentUpon>PlanetWindow.xaml</DependentUpon>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using StarWarsCharsMVVM.View;
+﻿using StarWarsCharsMVVM.Model;
+using StarWarsCharsMVVM.View;
 using StarWarsCharsMVVM.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,19 @@ namespace StarWarsCharsMVVM.ViewModel
         public OpenCharactersCommand OpenCharactersCommand { get; set; }
         public OpenStarshipsCommand OpenStarshipsCommand { get; set; }
 
+        public OpenPlanetsCommand OpenPlanetsCommand { get; set; }
+
 
         public void OpenCharacters()
         {
             CharacterWindow characterWindow = new CharacterWindow();
             characterWindow.ShowDialog();
+        }
+
+        internal void OpenPlanets()
+        {
+            PlanetWindow planetWindow = new PlanetWindow();
+            planetWindow.ShowDialog();
         }
 
         public void OpenStarships()
@@ -34,6 +43,7 @@ namespace StarWarsCharsMVVM.ViewModel
         {
             OpenCharactersCommand = new OpenCharactersCommand(this);
             OpenStarshipsCommand = new OpenStarshipsCommand(this);
+            OpenPlanetsCommand = new OpenPlanetsCommand(this);
 
         }
 

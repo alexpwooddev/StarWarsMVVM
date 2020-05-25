@@ -16,8 +16,10 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
         public const string BASE_URL = "https://swapi.dev/api/";
         public const string CHARACTER_SEARCH_ENDPOINT = "people/?search={0}";
         public const string STARSHIP_SEARCH_ENDPOINT = "starships/?search={0}";
+        public const string PLANET_SEARCH_ENDPOINT = "planets/?search={0}";
         public const string CHAR_ENDPOINT = "people/{0}/";
         public const string STARSHIP_ENDPOINT = "starships/{0}/";
+        public const string PLANET_ENDPOINT = "planets/[0]/";
 
 
 
@@ -71,6 +73,28 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
             return starships;
         }
 
+        public static async Task<List<Planet>> GetPlanets(string query)
+        {
+            List<Planet> planets = new List<Planet>();
+
+            string url = BASE_URL + string.Format(PLANET_SEARCH_ENDPOINT, query);
+
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                string json = await response.Content.ReadAsStringAsync();
+
+                int arrayStartIndex = json.IndexOf('[');
+                string jsonCut = json.Substring(arrayStartIndex);
+                int finalCurlyBracketPosition = jsonCut.LastIndexOf('}');
+                string jsonFullyCut = jsonCut.Remove(finalCurlyBracketPosition);
+
+                planets = JsonConvert.DeserializeObject<List<Planet>>(jsonFullyCut);
+            }
+
+            return planets;
+        }
+
 
 
 
@@ -111,6 +135,24 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
             }
 
             return starshipInfo;
+        }
+
+        public static async Task<Planet> GetPlanetInfo (string planetUrl)
+        {
+            Planet planetInfo = new Planet();
+
+            string url = planetUrl;
+
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                string json = await response.Content.ReadAsStringAsync();
+                string jsonArray = "[" + json + "]";
+
+                planetInfo = JsonConvert.DeserializeObject<List<Planet>>(jsonArray).FirstOrDefault();
+            }
+
+            return planetInfo;
         }
 
 

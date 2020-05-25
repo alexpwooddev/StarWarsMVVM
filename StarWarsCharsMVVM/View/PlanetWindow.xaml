@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:StarWarsCharsMVVM.View"
         xmlns:vm="clr-namespace:StarWarsCharsMVVM.ViewModel"
         mc:Ignorable="d"
-        Title="CharacterWindow" Height="275" Width="350">
+        Title="Planets" Height="305" Width="410">
     <Window.Resources>
-        <vm:CharacterVM x:Key="vm" />
+        <vm:PlanetVM x:Key="vm" />
     </Window.Resources>
 
     <Grid DataContext="{StaticResource vm}">
@@ -26,19 +26,19 @@
             </Rectangle.Fill>
         </Rectangle>
         <StackPanel Style="{StaticResource stackPanelStyle}">
-            <TextBlock Text="Search for a character:" 
+            <TextBlock Text="Search for a planet:" 
                        Style="{StaticResource headerTextBlockStyle}"
                        Margin="5,5,5,10"
                        />
             <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Search"
-                    Command="{Binding SearchCommand}"
+                    Command="{Binding PlanetSearchCommand}"
                     CommandParameter="{Binding Query}"
                     Style="{StaticResource buttonStyle}" />
             <ListView BorderThickness="0" 
                       Style="{StaticResource listViewStyle}"
-                      ItemsSource="{Binding Characters}"
-                      SelectedValue="{Binding SelectedCharacter}">
+                      ItemsSource="{Binding Planets}"
+                      SelectedValue="{Binding SelectedPlanet}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -51,45 +51,50 @@
         <StackPanel Grid.Column="1" Style="{StaticResource stackPanelStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Character Information:"
+                <TextBlock Text="Planet Information:"
                            Style="{StaticResource headerTextBlockStyle}"                      
                            Margin="5,5,5,10"
                            Grid.ColumnSpan="2"/>
                 <StackPanel Grid.Row="1" Grid.Column="0">
                     <TextBlock Text="Name:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Height:"
+                    <TextBlock Text="Population:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Weight:"
+                    <TextBlock Text="Rotation Period:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Hair Colour:"
+                    <TextBlock Text="Orbital Period:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Skin Colour:"
+                    <TextBlock Text="Diameter:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Eye Colour:"
+                    <TextBlock Text="Climate:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Year of Birth:"
+                    <TextBlock Text="Gravity:"
                        Style="{StaticResource textBlockStyle1}"/>
-                    <TextBlock Text="Gender:"
+                    <TextBlock Text="Terrain:"
                        Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Surface Water:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    
                 </StackPanel>
                 <StackPanel Grid.Row="1"
                             Grid.Column="1">
-                    <TextBox Text="{Binding SelectedCharacter.name}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.height}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.mass}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.hair_color}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.skin_color}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.eye_color}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.birth_year}" Style="{StaticResource textBoxStyle}"/>
-                    <TextBox Text="{Binding SelectedCharacter.gender}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.name}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.population, StringFormat={}{0} beings}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.rotation_period, StringFormat={}{0} hours}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.orbital_period, StringFormat={}{0} days}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.diameter, StringFormat='{}{0:#,0} km'}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.climate}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.gravity, StringFormat={}{0} Gs}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.terrain}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedPlanet.surface_water, StringFormat={}{0} %}" Style="{StaticResource textBoxStyle}"/>
+                    
 
                 </StackPanel>
 
