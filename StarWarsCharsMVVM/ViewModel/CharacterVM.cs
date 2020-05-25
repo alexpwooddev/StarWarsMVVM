@@ -50,7 +50,7 @@ namespace StarWarsCharsMVVM.ViewModel
         }
 
 
-
+        /*
         private CharacterInfo characterInfo;
 
         public CharacterInfo CharacterInfo
@@ -62,7 +62,7 @@ namespace StarWarsCharsMVVM.ViewModel
                 OnPropertyChanged("CharacterInfo");
             }
         }
-
+        */
 
         public SearchCommand SearchCommand { get; set; }
 
@@ -80,8 +80,11 @@ namespace StarWarsCharsMVVM.ViewModel
 
 
 
+        
+
         private async void GetCharacterInfo()
         {
+            Character CharacterInfo = new Character();
             Query = string.Empty;
             
 

@@ -1,0 +1,117 @@
+﻿<Window x:Class="StarWarsCharsMVVM.View.StarshipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StarWarsCharsMVVM.View"
+        xmlns:vm="clr-namespace:StarWarsCharsMVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="CharacterWindow" Height="350" Width="500">
+    <Window.Resources>
+        <vm:StarshipVM x:Key="vm" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Column="0" 
+                   Grid.ColumnSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#8c9ea3" Offset="1" />
+                    <GradientStop Color="#2a4158" Offset="0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Style="{StaticResource stackPanelStyle}">
+            <TextBlock Text="Search for a ship:" 
+                       Style="{StaticResource headerTextBlockStyle}"
+                       Margin="5,5,5,10"
+                       />
+            <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Search"
+                    Command="{Binding StarshipSearchCommand}"
+                    CommandParameter="{Binding Query}"
+                    Style="{StaticResource buttonStyle}" />
+            <ListView BorderThickness="0" 
+                      Style="{StaticResource listViewStyle}"
+                      ItemsSource="{Binding Starships}"
+                      SelectedValue="{Binding SelectedStarship}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Style="{StaticResource listViewTextBlockStyle}" Text="{Binding name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Style="{StaticResource stackPanelStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Ship Information:"
+                           Style="{StaticResource headerTextBlockStyle}"                      
+                           Margin="5,5,5,10"
+                           Grid.ColumnSpan="2"/>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <TextBlock Text="Name:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Model:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Manufacturer:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Cost:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Length:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Crew:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Passengers:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Cargo Capacity:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Max Atmosphere Speed:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Hyperdrive Rating:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Megalights/hour:"
+                       Style="{StaticResource textBlockStyle1}"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="1"
+                            Grid.Column="1">
+                    <TextBox Text="{Binding SelectedStarship.name}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.model}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.manufacturer}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.cost_in_credits, StringFormat={}{0} credits}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.length, StringFormat={}{0} m}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.crew}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.passengers}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.cargo_capacity, StringFormat={}{0} kg}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.max_atmosphering_speed}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.hyperdrive_rating}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedStarship.MGLT}" Style="{StaticResource textBoxStyle}"/>
+
+                </StackPanel>
+
+            </Grid>
+
+
+        </StackPanel>
+
+
+
+
+
+
+    </Grid>
+</Window>

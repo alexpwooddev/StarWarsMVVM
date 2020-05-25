@@ -14,8 +14,10 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
     public class SwapiHelper
     {
         public const string BASE_URL = "https://swapi.dev/api/";
-        public const string SEARCH_ENDPOINT = "people/?search={0}";
+        public const string CHARACTER_SEARCH_ENDPOINT = "people/?search={0}";
+        public const string STARSHIP_SEARCH_ENDPOINT = "starships/?search={0}";
         public const string CHAR_ENDPOINT = "people/{0}/";
+        public const string STARSHIP_ENDPOINT = "starships/{0}/";
 
 
 
@@ -23,7 +25,7 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
         {
             List<Character> characters = new List<Character>();
 
-            string url = BASE_URL + string.Format(SEARCH_ENDPOINT, query);
+            string url = BASE_URL + string.Format(CHARACTER_SEARCH_ENDPOINT, query);
 
             using (HttpClient client = new HttpClient())
             {
@@ -46,10 +48,35 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
             return characters;
         }
 
-
-        public static async Task<CharacterInfo> GetCharacterInfo (string charUrl)
+        public static async Task<List<Starship>> GetStarships(string query)
         {
-            CharacterInfo characterInfo = new CharacterInfo();
+            List<Starship> starships = new List<Starship>();
+
+            string url = BASE_URL + string.Format(STARSHIP_SEARCH_ENDPOINT, query);
+
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+
+                string json = await response.Content.ReadAsStringAsync();
+
+                int arrayStartIndex = json.IndexOf('[');
+                string jsonCut = json.Substring(arrayStartIndex);
+                int finalCurlyBracketPosition = jsonCut.LastIndexOf('}');
+                string jsonFullyCut = jsonCut.Remove(finalCurlyBracketPosition);
+
+                starships = JsonConvert.DeserializeObject<List<Starship>>(jsonFullyCut);
+            }
+
+            return starships;
+        }
+
+
+
+
+        public static async Task<Character> GetCharacterInfo (string charUrl)
+        {
+            Character characterInfo = new Character();
 
             string url = charUrl;
 
@@ -61,11 +88,29 @@ namespace StarWarsCharsMVVM.ViewModel.Helpers
 
                 string jsonAsArray = "[" + json + "]";
 
-                characterInfo = (JsonConvert.DeserializeObject<List<CharacterInfo>>(jsonAsArray)).FirstOrDefault();
+                characterInfo = JsonConvert.DeserializeObject<List<Character>>(jsonAsArray).FirstOrDefault();
             }
 
             return characterInfo;
 
+        }
+
+        public static async Task<Starship> GetStarshipInfo (string shipUrl)
+        {
+            Starship starshipInfo = new Starship();
+
+            string url = shipUrl;
+
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                string json = await response.Content.ReadAsStringAsync();
+                string jsonAsArray = "[" + json + "]";
+
+                starshipInfo = JsonConvert.DeserializeObject<List<Starship>>(jsonAsArray).FirstOrDefault();
+            }
+
+            return starshipInfo;
         }
 
 

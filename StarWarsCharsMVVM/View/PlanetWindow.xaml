@@ -1,0 +1,107 @@
+﻿<Window x:Class="StarWarsCharsMVVM.View.PlanetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StarWarsCharsMVVM.View"
+        xmlns:vm="clr-namespace:StarWarsCharsMVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="CharacterWindow" Height="275" Width="350">
+    <Window.Resources>
+        <vm:CharacterVM x:Key="vm" />
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource vm}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="145" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Column="0" 
+                   Grid.ColumnSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#8c9ea3" Offset="1" />
+                    <GradientStop Color="#2a4158" Offset="0" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Style="{StaticResource stackPanelStyle}">
+            <TextBlock Text="Search for a character:" 
+                       Style="{StaticResource headerTextBlockStyle}"
+                       Margin="5,5,5,10"
+                       />
+            <TextBox Style="{StaticResource textBoxStyle}" Text="{Binding Query, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Search"
+                    Command="{Binding SearchCommand}"
+                    CommandParameter="{Binding Query}"
+                    Style="{StaticResource buttonStyle}" />
+            <ListView BorderThickness="0" 
+                      Style="{StaticResource listViewStyle}"
+                      ItemsSource="{Binding Characters}"
+                      SelectedValue="{Binding SelectedCharacter}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <TextBlock Style="{StaticResource listViewTextBlockStyle}" Text="{Binding name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Style="{StaticResource stackPanelStyle}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Character Information:"
+                           Style="{StaticResource headerTextBlockStyle}"                      
+                           Margin="5,5,5,10"
+                           Grid.ColumnSpan="2"/>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <TextBlock Text="Name:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Height:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Weight:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Hair Colour:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Skin Colour:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Eye Colour:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Year of Birth:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                    <TextBlock Text="Gender:"
+                       Style="{StaticResource textBlockStyle1}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1"
+                            Grid.Column="1">
+                    <TextBox Text="{Binding SelectedCharacter.name}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.height}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.mass}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.hair_color}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.skin_color}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.eye_color}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.birth_year}" Style="{StaticResource textBoxStyle}"/>
+                    <TextBox Text="{Binding SelectedCharacter.gender}" Style="{StaticResource textBoxStyle}"/>
+
+                </StackPanel>
+
+            </Grid>
+
+
+        </StackPanel>
+
+
+
+
+
+
+    </Grid>
+</Window>

@@ -33,7 +33,7 @@
         </Rectangle>
         <StackPanel Margin="0,20,0,0">
             <Button Style="{StaticResource CircleButton}"
-                Command="{Binding OpenCharactersCommand}"
+                Command="{Binding OpenStarshipsCommand}"
                 Content=""
                     Width="60"
                 Height="60"

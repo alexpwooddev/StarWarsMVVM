@@ -14,22 +14,31 @@ namespace StarWarsCharsMVVM.ViewModel
 
 
         public OpenCharactersCommand OpenCharactersCommand { get; set; }
+        public OpenStarshipsCommand OpenStarshipsCommand { get; set; }
+
 
         public void OpenCharacters()
         {
             CharacterWindow characterWindow = new CharacterWindow();
             characterWindow.ShowDialog();
         }
-        
+
+        public void OpenStarships()
+        {
+            StarshipWindow starshipWindow = new StarshipWindow();
+            starshipWindow.ShowDialog();
+        }
+
 
         public InitialVM()
         {
             OpenCharactersCommand = new OpenCharactersCommand(this);
+            OpenStarshipsCommand = new OpenStarshipsCommand(this);
 
         }
 
-
         
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
