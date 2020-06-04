@@ -1,4 +1,4 @@
-# StarWarsCharsMVVM
+# StarWarsMVVM
 
 Description: Practice of MVVM structure with a simple Star Wars API
 
