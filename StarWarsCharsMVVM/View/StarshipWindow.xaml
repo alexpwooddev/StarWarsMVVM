@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StarWarsCharsMVVM.View"
         xmlns:vm="clr-namespace:StarWarsCharsMVVM.ViewModel"
         mc:Ignorable="d"
-        Title="Starships" Height="350" Width="500">
+        Title="Starships" Height="360" Width="500">
     <Window.Resources>
         <vm:StarshipVM x:Key="vm" />
     </Window.Resources>
